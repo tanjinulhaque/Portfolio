@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Portfolio of Md. Tanjin ul Haque: customer success and support operations for traders. Demos use fictional data.">
+<title>Tanjin ul Haque Portfolio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout concept: a calm working notebook. One column of case studies, each led by the
+   customer-success lens it demonstrates, each with something the visitor can operate. */
+:root{
+  --bg:#F2F6F7; --surface:#FFFFFF; --ink:#13262B; --muted:#52666C; --line:#D3DDE0;
+  --accent:#0C6A6A; --accent-ink:#FFFFFF; --accent-soft:#DCEEED;
+  --good:#17703F; --good-soft:#DDF0E4; --warn:#8F5A0B; --warn-soft:#F8EBD0; --bad:#A92F27; --bad-soft:#F8DFDC;
+  --font-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --font-body:'Public Sans','Segoe UI',system-ui,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D191C; --surface:#142327; --ink:#E5EEF0; --muted:#9BB0B5; --line:#26393E;
+    --accent:#5CC4BF; --accent-ink:#06201F; --accent-soft:#17383A;
+    --good:#6FD39B; --good-soft:#173525; --warn:#E3B05B; --warn-soft:#3A2D14; --bad:#F08A80; --bad-soft:#3E1D1A;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D191C; --surface:#142327; --ink:#E5EEF0; --muted:#9BB0B5; --line:#26393E;
+  --accent:#5CC4BF; --accent-ink:#06201F; --accent-soft:#17383A;
+  --good:#6FD39B; --good-soft:#173525; --warn:#E3B05B; --warn-soft:#3A2D14; --bad:#F08A80; --bad-soft:#3E1D1A;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--bg); color:var(--ink); font:16px/1.6 var(--font-body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 56px;
+}
+.wrap{max-width:1040px;margin:0 auto}
+h1,h2,h3{font-family:var(--font-display);line-height:1.12;margin:0;text-wrap:balance;letter-spacing:-0.01em}
+h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700}
+h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:650}
+h3{font-size:1.05rem;font-weight:650}
+p{margin:0 0 .8em}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.eyebrow{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin:0 0 .7rem}
+.muted{color:var(--muted)}
+
+/* hero */
+.hero{padding:56px 0 28px}
+.lede{max-width:60ch;font-size:1.15rem;margin-top:1rem;color:var(--ink)}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:28px 0 22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.facts div{padding:16px 18px 16px 0}
+.facts div+div{padding-left:18px;border-left:1px solid var(--line)}
+.facts dt{font-family:var(--font-display);font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.1}
+.facts dd{margin:.3rem 0 0;font-size:.88rem;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.92rem}
+.nav a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px}
+.nav a:hover{border-color:var(--accent);color:var(--accent)}
+.note-fict{font-size:.85rem;color:var(--muted);margin-top:18px;max-width:70ch}
+
+/* sections */
+.block{padding:52px 0 8px;scroll-margin-top:8px}
+.block>.intro{max-width:66ch;margin:.6rem 0 1.6rem;color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:20px}
+.chip{display:inline-block;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:28px;align-items:start}
+.story h3{margin:1.2rem 0 .25rem;font-size:.78rem;font-family:var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.story h3:first-child{margin-top:0}
+.story p{margin:0 0 .4em}
+.result-line{font-family:var(--font-display);font-size:1.3rem;font-weight:650;line-height:1.25}
+
+/* demo */
+textarea{width:100%;min-height:220px;font:13px/1.5 var(--font-mono);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:12px;resize:vertical}
+.row{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin:12px 0}
+label{font-size:.88rem;color:var(--muted)}
+input[type=number]{width:4.5rem;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:6px 8px}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);border-radius:6px;padding:8px 16px;font-weight:600}
+.btn:hover{filter:brightness(1.07)}
+.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:8px 14px}
+.ghost:hover{border-color:var(--accent);color:var(--accent)}
+.summary{font-weight:600;margin:6px 0 10px}
+.msg{padding:10px 12px;border-radius:6px;margin:0}
+.msg.bad{background:var(--bad-soft);color:var(--bad)}
+.scroll{overflow-x:auto}
+.tbl{width:100%;border-collapse:collapse;font-size:.9rem}
+.tbl th{font-family:var(--font-mono);font-weight:500;font-size:.7rem;letter-spacing:.07em;text-transform:uppercase;text-align:left;color:var(--muted);padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap;font-variant-numeric:tabular-nums}
+.tbl td.mono{font-family:var(--font-mono);font-size:.84rem}
+.pill{display:inline-block;font-size:.76rem;font-weight:600;padding:2px 10px;border-radius:99px;white-space:nowrap}
+.pill.good{background:var(--good-soft);color:var(--good)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)}
+.pill.next{background:var(--accent-soft);color:var(--accent)}
+.pill.wait{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.small{font-size:.84rem;color:var(--muted)}
+
+/* insights */
+.themes{display:grid;gap:6px}
+.theme{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,2fr) 2.6rem;gap:12px;align-items:center;text-align:left;width:100%;background:transparent;color:var(--ink);border:1px solid transparent;border-radius:6px;padding:8px 10px}
+.theme:hover{background:var(--bg)}
+.theme[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
+.theme .bar{height:10px;border-radius:2px;background:var(--line);overflow:hidden}
+.theme .bar i{display:block;height:100%;background:var(--accent);border-radius:2px}
+.theme .n{font-family:var(--font-mono);font-size:.85rem;text-align:right}
+.detail{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+.quote{border-left:3px solid var(--line);padding:2px 0 2px 12px;margin:0 0 8px;color:var(--muted);font-style:italic}
+.memo{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:18px}
+.memo h3{margin-bottom:.5rem}
+.memo ul{margin:.4rem 0 .8rem 1.1rem;padding:0}
+pre{margin:0;font:12.5px/1.55 var(--font-mono);white-space:pre-wrap;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:12px}
+details{margin-top:14px}
+summary{cursor:pointer;font-weight:600}
+
+/* dashboard */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.filters button{background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:5px 14px;font-size:.88rem}
+.filters button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.score{display:inline-flex;align-items:center;gap:8px}
+.score b{min-width:1.8rem;text-align:right}
+.score i{display:block;width:56px;height:8px;border-radius:2px;background:var(--line);overflow:hidden;position:relative}
+.score i u{position:absolute;inset:0 auto 0 0;display:block;border-radius:2px}
+.rowbtn{background:none;border:0;color:var(--ink);font-weight:600;text-align:left;padding:0;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+tr.sel td{background:var(--accent-soft)}
+.panel{margin-top:16px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.panel h3{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:.35rem}
+.panel p{margin:0}
+
+/* comms */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.tabs button{background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:7px 14px;font-size:.92rem}
+.tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.msgbox{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:18px}
+.msgbox p:last-child{margin-bottom:0}
+.why{margin:0;padding-left:1.1rem}
+.why li{margin-bottom:.4rem}
+.cols{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:22px}
+
+/* contact */
+.contact{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;margin-top:14px}
+.addr{font-family:var(--font-mono);font-size:.9rem;user-select:all}
+footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted);max-width:70ch}
+
+/* workflow, escalations, faq */
+.field{display:grid;gap:5px;margin-bottom:12px}
+.field input[type=text],.field select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 10px;width:100%;min-width:0}
+.field input[type=checkbox]{margin-right:8px;accent-color:var(--accent)}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.step{display:grid;grid-template-columns:5.5rem minmax(0,1fr);gap:12px;align-items:start;padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.step .k{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.step .t{margin:0}
+.step.on{border-color:var(--accent);background:var(--accent-soft)}
+.step.on .k{color:var(--accent)}
+.step.off{opacity:.5}
+.res{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+.res dl{display:grid;grid-template-columns:7rem minmax(0,1fr);gap:6px 12px;margin:0}
+.res dt{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.res dd{margin:0;min-width:0}
+.cmp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:16px}
+.cmp .side{border:1px solid var(--line);border-radius:8px;padding:16px;min-width:0}
+.cmp .before{background:var(--bg);color:var(--muted)}
+.cmp .side h4{font-family:var(--font-display);font-size:1.05rem;font-weight:650;margin:.7rem 0 .5rem;color:var(--ink)}
+.cmp .side ol{margin:.4rem 0 .7rem 1.2rem;padding:0}
+.cmp .side p{margin:0 0 .6em}
+
+@media (max-width:820px){
+  .cmp{grid-template-columns:minmax(0,1fr)}
+  .split,.cols{grid-template-columns:minmax(0,1fr)}
+  .panel{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){
+  .hero{padding-top:36px}
+  .facts{grid-template-columns:minmax(0,1fr)}
+  .facts div,.facts div+div{padding:14px 0;border-left:0}
+  .facts div+div{border-top:1px solid var(--line)}
+  .step{grid-template-columns:minmax(0,1fr);gap:2px}
+  .res dl{grid-template-columns:minmax(0,1fr)}
+  .theme{grid-template-columns:minmax(0,1fr) 2.2rem}
+  .theme .bar{grid-column:1 / -1;grid-row:2}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+<header class="hero">
+  <p class="eyebrow">Portfolio · Customer success and support operations</p>
+  <h1>Md. Tanjin ul Haque</h1>
+  <p class="lede">I support traders at FundedNext Futures, a leading Futures Prop Trading firm and FN Markets, a real time brokerage firm, where a clear answer matters most when someone is under pressure. Over the past year and a half I have helped more than 18,000 clients, and I turn what they tell me into faster processes and better guidance.</p>
+  <dl class="facts">
+    <div><dt>18,000+</dt><dd>clients supported in 1.5 years</dd></div>
+    <div><dt>90%</dt><dd>average client satisfaction rate</dd></div>
+    <div><dt>12–15 → 2–3 min</dt><dd>handling time for a recurring check, after I automated it</dd></div>
+  </dl>
+  <nav class="nav" aria-label="Sections">
+    <a href="#automation">Automation</a><a href="#insights">Client insights</a><a href="#escalations">Escalations</a><a href="#faq">FAQ revamp</a><a href="#workflow">Workflow</a><a href="#health">Trader accounts</a><a href="#writing">Client communication</a><a href="#contact">Contact</a>
+  </nav>
+  <p class="note-fict">Every demo below uses fictional data. No real client, account, conversation or internal system information is shown.</p>
+</header>
+
+<main>
+<section class="block" id="automation">
+  <p class="eyebrow">Success engineer</p>
+  <h2>A paste-in tool that cut a 12–15 minute check to 2–3 minutes</h2>
+  <p class="intro">The one project here that comes from my real work, described in general terms. The demo is a rebuilt version that runs on made-up data.</p>
+  <div class="split">
+    <div class="story">
+      <h3>The problem</h3>
+      <p>A trader can hold several funded accounts, but only a limited number can be active at once. The others, which have already passed their evaluation, wait on hold. When an active account is lost to a rule breach, support has to confirm which held account is next in line. Doing that meant filtering a long raw data export by hand, every time.</p>
+      <p>Direct access to the system was not available, so a connected tool was not an option.</p>
+      <h3>What I built</h3>
+      <p>A small web tool. I filter the export down to the few fields that matter, paste it in, and the tool lists the held accounts in order and shows which one is next. Nothing is stored and no system access is needed.</p>
+      <h3>The result</h3>
+      <p class="result-line">12–15 minutes down to 2–3 minutes per check, and an Excellence Card for the work.</p>
+      <h3>What I took from it</h3>
+      <p>A limit can lead to a better design. Having no access pushed me to a simpler tool with fewer fields, less risk and nothing to maintain.</p>
+    </div>
+    <div class="card" aria-labelledby="demo-h">
+      <span class="chip">Live demo · fictional data</span>
+      <h3 id="demo-h" style="margin:.7rem 0 .2rem">Held-account finder</h3>
+      <p class="small">Paste an account list as JSON, set how many accounts may be active, and run it. Edit the data to try other cases. The rule here (earliest pass date goes live first) is made up for the demo.</p>
+      <label for="feed" class="small">Account data</label>
+      <textarea id="feed" spellcheck="false"></textarea>
+      <div class="row">
+        <label for="limit">Active accounts allowed</label>
+        <input type="number" id="limit" min="1" max="20" value="3">
+        <button class="btn" id="run" type="button">Find held accounts</button>
+        <button class="ghost" id="reset" type="button">Reset sample</button>
+      </div>
+      <div id="out" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="insights">
+  <p class="eyebrow">Success engineer · Voice of customer</p>
+  <h2>Forty conversations, one recommendation</h2>
+  <p class="intro">Each week I report client pain points and suggestions. This is how I would turn a batch of support chats into something a product team can act on. The conversations below are invented.</p>
+  <div class="split">
+    <div class="card">
+      <h3>Themes found in 40 sample chats</h3>
+      <p class="small">Select a theme to see example wording and what I would do about it.</p>
+      <div class="themes" id="themes"></div>
+      <div class="detail" id="themeDetail"></div>
+    </div>
+    <div>
+      <div class="memo" id="memo"></div>
+      <details>
+        <summary>The AI prompt I would use</summary>
+        <pre>You are helping a support team. Below are 40 support chats with names and account numbers removed.
+1. Group them into themes of no more than six.
+2. Count the chats in each theme.
+3. For each theme, give two short example phrases a client used.
+4. Suggest one change the product team could make for each theme.
+Only use what is in the chats. If a chat fits two themes, count it under the main one and say so.</pre>
+        <p class="small" style="margin-top:8px">AI does the first grouping. I read the chats behind each theme before anything is reported, because a count is only useful if the themes are right.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="escalations">
+  <p class="eyebrow">Support operations · Escalation analysis</p>
+  <h2>Why tickets get escalated, and which ones did not need to be</h2>
+  <p class="intro">Thirty fictional escalated tickets, grouped two ways. Select a group to see its tickets. The aim is to separate escalations that truly need another team from the ones that better first contact or a better FAQ would have prevented.</p>
+  <div class="split">
+    <div class="card">
+      <div class="filters" id="escGroup" role="group" aria-label="Group tickets by"></div>
+      <div class="themes" id="escBars"></div>
+    </div>
+    <div class="memo" id="escMemo"></div>
+  </div>
+  <div class="card" style="margin-top:18px" id="escList"></div>
+</section>
+
+<section class="block" id="faq">
+  <p class="eyebrow">Knowledge base · FAQ revamp</p>
+  <h2>Rewriting FAQs so people can solve it on the first read</h2>
+  <p class="intro">I start from the questions that cause the most tickets, rewrite each answer so it can be read in under a minute, and check it against six simple tests. Both examples below are fictional.</p>
+  <div class="card">
+    <div class="tabs" id="faqTabs" role="tablist" aria-label="FAQ examples"></div>
+    <div id="faqView"></div>
+  </div>
+  <div class="memo" style="margin-top:18px">
+    <h3>My revamp routine</h3>
+    <ol class="why">
+      <li>Pull the top themes from tickets and chats, including the ones behind escalations.</li>
+      <li>Rewrite the title as the question people actually ask.</li>
+      <li>Put the answer in the first sentence.</li>
+      <li>Add numbered steps and say what success looks like.</li>
+      <li>Say exactly what to send if it still fails.</li>
+      <li>Ask someone who has not seen it to try it, then compare ticket volume a month later.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="block" id="workflow">
+  <p class="eyebrow">Support operations · Intercom and CRM</p>
+  <h2>A basic workflow that collects the details support needs</h2>
+  <p class="intro">A fictional example of the kind of workflow I build in Intercom or any CRM. It answers what can be answered at once, asks for the missing details one time, and hands over a complete ticket when a person needs to step in. Change the inputs and the path through the steps changes.</p>
+  <div class="split">
+    <div class="card" aria-labelledby="wf-h">
+      <span class="chip">Test the workflow · fictional</span>
+      <h3 id="wf-h" style="margin:.7rem 0 .8rem">Incoming conversation</h3>
+      <div class="field"><label for="wfMsg">Trader's first message</label><input type="text" id="wfMsg" value="My chart is blank and I cannot see any prices"></div>
+      <div class="field"><label for="wfPlat">Platform chosen on the reply buttons</label>
+        <select id="wfPlat"><option>Platform A</option><option>Platform B</option><option>Platform C</option><option>Other</option></select></div>
+      <div class="field"><label for="wfFix">Did the guide fix it?</label>
+        <select id="wfFix"><option value="no">No, still not working</option><option value="yes">Yes, it fixed it</option></select></div>
+      <div class="field"><label for="wfTrade"><input type="checkbox" id="wfTrade">The trader has an open trade right now</label></div>
+      <div id="wfResult" aria-live="polite"></div>
+      <p class="small" style="margin:12px 0 0">Why it is built this way: the trader gets a useful first reply, the details are collected once, priority is set by facts instead of tone, and the ticket reaches the next team complete.</p>
+    </div>
+    <ol class="steps" id="wfSteps" aria-label="Workflow steps"></ol>
+  </div>
+</section>
+
+<section class="block" id="health">
+  <p class="eyebrow">Proactive account management</p>
+  <h2>Which trader accounts need attention first</h2>
+  <p class="intro">A support view for a fictional futures prop trading program with twelve trader accounts. It ranks accounts by the signals that usually lead to a support case, and suggests a next step for each, so outreach happens before a problem grows. Support shares rules and platform help and never gives trading advice.</p>
+  <div class="card">
+    <div class="filters" id="filters" role="group" aria-label="Filter by status"></div>
+    <div class="scroll">
+      <table class="tbl" id="acctTable">
+        <thead><tr><th>Account</th><th>Size</th><th>Priority</th><th>Drawdown used</th><th>Days since last trade</th><th>Open cases</th><th>Market data</th><th>Status</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="small" style="margin:10px 0 0">Priority = 60% drawdown used + 15% days since last trade (capped at 10) + 15% open cases (capped at 4) + 10% market data not activated. A score of 55 or more means reach out today, 30 to 54 means check in, and under 30 is on track. The weights are illustrative. Sorted with the highest priority first.</p>
+    <div class="panel" id="panel"></div>
+  </div>
+</section>
+
+<section class="block" id="writing">
+  <p class="eyebrow">Trusted advisor</p>
+  <h2>How I write to clients</h2>
+  <p class="intro">Three situations I handle often, shown with invented details. The notes beside each message explain the choices.</p>
+  <div class="card">
+    <div class="tabs" role="tablist" aria-label="Examples" id="tabs"></div>
+    <div id="tabPanel" role="tabpanel"></div>
+  </div>
+</section>
+
+<section class="block" id="contact">
+  <p class="eyebrow">Contact</p>
+  <h2>Let's talk</h2>
+  <p class="intro">I am a Client Experience Executive in Bangladesh, supporting traders at FundedNext Futures and FN Markets. I have a BBA in Human Resource Management from Khulna University and work with Excel, Google Sheets, ClickUp, Intercom and AI tools such as Claude and Gemini. I am always looking for new challenges.</p>
+  <div class="contact">
+    <a href="https://www.linkedin.com/in/tanjintawmi26/" target="_blank" rel="noopener">LinkedIn profile</a>
+    <span class="addr" id="addr">tanjinulhaquetawmi@gmail.com</span>
+    <button class="ghost" id="copy" type="button">Copy email</button>
+    <span class="small" id="copyMsg" aria-live="polite"></span>
+  </div>
+  <footer>Demos on this page are illustrations built with fictional data. They show how I work, not any real client, rule or internal system.</footer>
+</section>
+</main>
+</div>
+
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)};
+  var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+
+  /* ---------- 1. Held-account finder (fictional) ---------- */
+  var SAMPLE=[
+    {id:"ACC-2041",status:"Active",passedOn:"2026-01-14"},
+    {id:"ACC-2042",status:"Active",passedOn:"2026-01-29"},
+    {id:"ACC-2043",status:"Breached",passedOn:"2026-02-03"},
+    {id:"ACC-2044",status:"On Hold",passedOn:"2026-04-18"},
+    {id:"ACC-2045",status:"On Hold",passedOn:"2026-02-11"},
+    {id:"ACC-2046",status:"On Hold",passedOn:"2026-03-26"},
+    {id:"ACC-2047",status:"On Hold",passedOn:"2026-05-07"}
+  ];
+  var ta=$('#feed'), limitEl=$('#limit'), out=$('#out');
+  function sampleText(){return '[\n'+SAMPLE.map(function(r){return '  '+JSON.stringify(r)}).join(',\n')+'\n]'}
+  function bad(m){out.innerHTML='<p class="msg bad">'+esc(m)+'</p>'}
+  function run(){
+    var data;
+    try{data=JSON.parse(ta.value)}catch(e){bad('This is not valid JSON yet. Check for a missing comma, bracket or quotation mark.');return}
+    if(data&&!Array.isArray(data)&&Array.isArray(data.accounts)){data=data.accounts}
+    if(!Array.isArray(data)||!data.length){bad('Paste a list of accounts, for example [{"id":"A1","status":"Active"}].');return}
+    for(var i=0;i<data.length;i++){
+      var r=data[i];
+      if(!r||typeof r!=='object'||!r.id||!r.status){bad('Row '+(i+1)+' needs an "id" and a "status".');return}
+    }
+    var limit=Math.max(1,parseInt(limitEl.value,10)||3);
+    var st=function(r){return String(r.status).trim().toLowerCase()};
+    var active=data.filter(function(r){return st(r)==='active'}).length;
+    var breached=data.filter(function(r){return st(r)==='breached'}).length;
+    var held=data.filter(function(r){return st(r)==='on hold'});
+    held.sort(function(a,b){return String(a.passedOn||'9999').localeCompare(String(b.passedOn||'9999'))});
+    var open=Math.max(0,limit-active);
+    var line=active+' active · '+breached+' breached · '+held.length+' on hold. ';
+    line+= open===0 ? 'No slot is open, so no held account moves up.' : open+(open===1?' slot is':' slots are')+' open.';
+    var html='<p class="summary">'+esc(line)+'</p>';
+    if(!held.length){html+='<p class="small">No accounts are on hold.</p>'}
+    else{
+      html+='<div class="scroll"><table class="tbl"><thead><tr><th>Order</th><th>Account</th><th>Passed on</th><th>Result</th></tr></thead><tbody>';
+      held.forEach(function(r,k){
+        var next=k<open;
+        html+='<tr><td class="mono">'+(k+1)+'</td><td class="mono">'+esc(r.id)+'</td><td class="mono">'+esc(r.passedOn||'not given')+'</td><td><span class="pill '+(next?'next':'wait')+'">'+(next?'Next up':'Waiting')+'</span></td></tr>';
+      });
+      html+='</tbody></table></div>';
+    }
+    out.innerHTML=html;
+  }
+  ta.value=sampleText();
+  $('#run').addEventListener('click',run);
+  $('#reset').addEventListener('click',function(){ta.value=sampleText();limitEl.value=3;run()});
+  run();
+
+  /* ---------- 2. Client insights (fictional) ---------- */
+  var THEMES=[
+    {name:'Market data not showing on the platform',n:11,q:['"My chart is blank. I cannot see any prices."','"I subscribed, but there is no live data."'],a:'Add a clear "activate market data" step and a status badge to the dashboard, and link a short guide for each platform from the welcome email.'},
+    {name:'Unclear why an account was closed or limited',n:9,q:['"Nobody told me which rule I broke."','"I did not know my loss limit was close until it was reached."'],a:'Show remaining drawdown in the dashboard, send an alert as the limit gets close, and put the rule name and a plain reason in every closure message.'},
+    {name:'Which account is active or on hold',n:7,q:['"Which of my accounts is live right now?"','"I passed the evaluation. When does the next account start?"'],a:'Show the status of every account on one page, including the order in which held accounts go live.'},
+    {name:'Waiting for a payout or review update',n:6,q:['"It has been three days. Is anyone looking at this?"','"I do not know which step my request is on."'],a:'Show request status (received, in review, decided) and send an update at each change.'},
+    {name:'Sign-in or verification problems',n:4,q:['"The verification code never arrived."','"I was locked out after changing my phone."'],a:'Add a visible "resend code" button and a clear account recovery path.'},
+    {name:'Other',n:3,q:['"Can you add a dark mode?"','"Thank you for the quick reply."'],a:'Log feature requests with the product team and share positive feedback with the support team.'}
+  ];
+  var total=THEMES.reduce(function(s,t){return s+t.n},0), maxN=Math.max.apply(null,THEMES.map(function(t){return t.n}));
+  var themesEl=$('#themes'), detailEl=$('#themeDetail');
+  function showTheme(i){
+    Array.prototype.forEach.call(themesEl.children,function(b,k){b.setAttribute('aria-pressed',k===i?'true':'false')});
+    var t=THEMES[i];
+    detailEl.innerHTML='<h3>'+esc(t.name)+' · '+t.n+' of '+total+' chats ('+Math.round(t.n/total*100)+'%)</h3>'+
+      t.q.map(function(q){return '<p class="quote">'+esc(q)+'</p>'}).join('')+
+      '<p><strong>What I would do:</strong> '+esc(t.a)+'</p>';
+  }
+  THEMES.forEach(function(t,i){
+    var b=document.createElement('button');
+    b.type='button';b.className='theme';b.setAttribute('aria-pressed','false');
+    b.innerHTML='<span>'+esc(t.name)+'</span><span class="bar"><i style="width:'+Math.round(t.n/maxN*100)+'%"></i></span><span class="n">'+t.n+'</span>';
+    b.addEventListener('click',function(){showTheme(i)});
+    themesEl.appendChild(b);
+  });
+  showTheme(0);
+  var top=THEMES[0], second=THEMES[1];
+  $('#memo').innerHTML='<h3>Weekly note to the product team</h3>'+
+    '<p><strong>Main finding:</strong> '+Math.round(top.n/total*100)+'% of the '+total+' chats ('+top.n+') were about market data not showing on the trading platform. The next largest group, '+Math.round(second.n/total*100)+'%, was about not understanding why an account was closed or limited.</p>'+
+    '<p><strong>Suggested actions, in order:</strong></p><ul><li>Add a market data setup step and a status badge to the dashboard.</li><li>Show remaining drawdown, and the rule name, in every limit or closure message.</li><li>Show the status of every account on one page.</li></ul>'+
+    '<p class="small" style="margin:0">Based on a sample of invented chats. Counts show where to look first. They are not proof of cause.</p>';
+
+  /* ---------- 2b. Intercom-style workflow (fictional) ---------- */
+  var WF=[
+    {id:'s1',k:'Trigger',t:'A trader starts a conversation.'},
+    {id:'s2',k:'Condition',t:'Does the first message mention prices, a blank chart or market data?'},
+    {id:'sx',k:'Action',t:'No: send it to the general inbox, unchanged.'},
+    {id:'s3',k:'Bot',t:'Yes: ask which platform they use, with reply buttons.'},
+    {id:'s4',k:'Bot',t:'Send the matching "Activate market data" guide.'},
+    {id:'s5',k:'Bot',t:'Ask: did this fix it?'},
+    {id:'s6',k:'Action',t:'Yes: tag it "resolved-by-guide", close the conversation and send the satisfaction survey.'},
+    {id:'s7',k:'Action',t:'No: ask for the market and a screenshot, then create a Market data ticket. Priority is High if an open trade is affected, otherwise Normal.'},
+    {id:'s8',k:'Action',t:'Assign to Technical Support and start the response timer: 1 hour for High, 4 hours for Normal.'},
+    {id:'s9',k:'Bot',t:'Tell the trader what happens next and when to expect a reply.'}
+  ];
+  var wfEl=$('#wfSteps'), wfRes=$('#wfResult');
+  function runWf(){
+    var msg=$('#wfMsg').value.toLowerCase(), plat=$('#wfPlat').value, fixed=$('#wfFix').value==='yes', trade=$('#wfTrade').checked;
+    var hit=/(price|blank|no data|market data|chart)/.test(msg);
+    var on={s1:1,s2:1}, res;
+    if(!hit){
+      on.sx=1;
+      res=[['Outcome','Sent to the general inbox'],['Tags','None'],['Reason','The message did not mention prices or market data']];
+    }else{
+      on.s3=on.s4=on.s5=1;
+      if(fixed){
+        on.s6=1;
+        res=[['Outcome','Resolved by the guide'],['Tags','market-data, '+plat.toLowerCase().replace(/\s+/g,'-')+', resolved-by-guide'],['Next','Conversation closed and survey sent'],['Human time','None']];
+      }else{
+        on.s7=on.s8=on.s9=1;
+        var when=trade?'1 hour':'4 hours';
+        res=[['Outcome','Escalated with full details'],['Ticket','Market data · '+plat],['Priority',trade?'High (open trade affected)':'Normal'],['Assigned to','Technical Support'],['Reply due','Within '+when],['Trader sees','"Thanks. I have passed this to our technical team with your platform, market and screenshot. You will hear back within '+when+'."']];
+      }
+    }
+    wfEl.innerHTML=WF.map(function(s){return '<li class="step '+(on[s.id]?'on':'off')+'"><span class="k">'+s.k+'</span><p class="t">'+esc(s.t)+'</p></li>'}).join('');
+    wfRes.innerHTML='<div class="res"><h3 style="margin-bottom:.6rem">Result</h3><dl>'+res.map(function(r){return '<dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd>'}).join('')+'</dl></div>';
+  }
+  ['wfMsg','wfPlat','wfFix','wfTrade'].forEach(function(id){var el=$('#'+id);el.addEventListener('input',runWf);el.addEventListener('change',runWf)});
+  runWf();
+
+  /* ---------- 2c. Escalation analysis (fictional) ---------- */
+  var CATS={md:'Market data',rd:'Rule decision',as:'Account status',pr:'Payout or review',si:'Sign-in',ot:'Other'};
+  var REAS={eng:'Needed engineering',pol:'Needed a policy decision',data:'Needed another team’s data',info:'Missing details on first contact',faq:'Answer not in the FAQ'};
+  var PREV={info:1,faq:1};
+  var TICK=[
+    ['md','eng',26],['md','info',4],['md','info',3],['md','eng',31],['md','faq',5],['md','info',6],['md','eng',22],['md','faq',4],
+    ['rd','pol',40],['rd','faq',12],['rd','pol',52],['rd','faq',9],['rd','pol',36],['rd','info',14],
+    ['as','data',20],['as','faq',8],['as','data',27],['as','faq',6],['as','info',10],
+    ['pr','data',44],['pr','pol',38],['pr','data',50],['pr','info',16],
+    ['si','eng',18],['si','info',3],['si','eng',24],['si','info',5],
+    ['ot','eng',30],['ot','pol',21],['ot','faq',7]
+  ].map(function(t,i){return {id:'T-'+(1001+i),cat:t[0],reas:t[1],h:t[2]}});
+  var escBy='reas', escSel=null;
+  var escBars=$('#escBars'), escList=$('#escList'), escGroup=$('#escGroup');
+  function avg(a){return a.length?a.reduce(function(s,t){return s+t.h},0)/a.length:0}
+  function groupData(){
+    var names=escBy==='reas'?REAS:CATS, map={};
+    TICK.forEach(function(t){var k=t[escBy];(map[k]=map[k]||[]).push(t)});
+    return Object.keys(map).map(function(k){return {key:k,name:names[k],n:map[k].length,avg:avg(map[k]),items:map[k]}}).sort(function(x,y){return y.n-x.n});
+  }
+  function renderEsc(){
+    escGroup.innerHTML='';
+    [['reas','By reason'],['cat','By category']].forEach(function(o){
+      var b=document.createElement('button');b.type='button';b.textContent=o[1];
+      b.setAttribute('aria-pressed',o[0]===escBy?'true':'false');
+      b.addEventListener('click',function(){escBy=o[0];escSel=null;renderEsc()});
+      escGroup.appendChild(b);
+    });
+    var groups=groupData();
+    if(!escSel||!groups.some(function(g){return g.key===escSel})){escSel=groups[0].key}
+    var maxN=groups[0].n;
+    escBars.innerHTML='';
+    groups.forEach(function(g){
+      var b=document.createElement('button');b.type='button';b.className='theme';b.setAttribute('aria-pressed',g.key===escSel?'true':'false');
+      var tag=(escBy==='reas'&&PREV[g.key])?' · preventable':'';
+      b.innerHTML='<span>'+esc(g.name)+'<small class="small" style="display:block">average '+g.avg.toFixed(1)+' h to resolve'+tag+'</small></span><span class="bar"><i style="width:'+Math.round(g.n/maxN*100)+'%"></i></span><span class="n">'+g.n+'</span>';
+      b.addEventListener('click',function(){escSel=g.key;renderEsc()});
+      escBars.appendChild(b);
+    });
+    var cur=groups.filter(function(g){return g.key===escSel})[0];
+    var rows=cur.items.slice().sort(function(a,b){return b.h-a.h});
+    escList.innerHTML='<h3 style="margin-bottom:.6rem">'+esc(cur.name)+' · '+cur.n+' tickets, longest first</h3><div class="scroll"><table class="tbl"><thead><tr><th>Ticket</th><th>Category</th><th>Why it was escalated</th><th>Hours to resolve</th></tr></thead><tbody>'+
+      rows.map(function(t){return '<tr><td class="mono">'+t.id+'</td><td>'+esc(CATS[t.cat])+'</td><td>'+esc(REAS[t.reas])+'</td><td>'+t.h+'</td></tr>'}).join('')+'</tbody></table></div>';
+  }
+  (function(){
+    var total=TICK.length;
+    var prev=TICK.filter(function(t){return PREV[t.reas]}), rest=TICK.filter(function(t){return !PREV[t.reas]});
+    var pol=TICK.filter(function(t){return t.reas==='pol'}), dat=TICK.filter(function(t){return t.reas==='data'});
+    $('#escMemo').innerHTML='<h3>What the data says</h3>'+
+      '<p><strong>'+prev.length+' of '+total+' escalations ('+Math.round(prev.length/total*100)+'%)</strong> came from missing details on first contact or an answer that was not in the FAQ. Those closed in about '+avg(prev).toFixed(0)+' hours on average, against '+avg(rest).toFixed(0)+' hours for the rest.</p>'+
+      '<p>Policy decisions ('+avg(pol).toFixed(0)+' h) and requests for another team’s data ('+avg(dat).toFixed(0)+' h) took longest, so they deserve attention when volume is high.</p>'+
+      '<p><strong>What I would change:</strong></p><ul>'+
+      '<li>Collect platform, market and a screenshot at the start of every market data chat, as in the workflow above.</li>'+
+      '<li>Rewrite the FAQ articles behind the "not in the FAQ" tickets, as in the revamp below.</li>'+
+      '<li>Agree ready answers for the most common policy questions, so they do not wait for a decision.</li>'+
+      '<li>Use one escalation template, so other teams get everything in the first message.</li></ul>'+
+      '<p class="small" style="margin:0">Fictional data. Counts show where to look first. They do not prove cause.</p>';
+  })();
+  renderEsc();
+
+  /* ---------- 2d. FAQ revamp (fictional) ---------- */
+  var TESTS=['Title matches the question people ask','Answer in the first sentence','Plain words, with the rule named but not quoted','Numbered steps or a worked example','Says exactly what to send if it still fails','Short enough to read in under a minute'];
+  var FAQ=[
+    {tab:'Market data',
+     before:{title:'Market data',body:['In order to view market data on your platform it is necessary that the relevant exchange data subscriptions are enabled, as per the terms of the data agreement and the applicable exchange fee schedule, which may vary.','Clients who are experiencing issues with the display of data should first verify that their subscription is active and that the platform has been restarted following any change to settings. If the issue persists, they should contact support, who will review the matter in accordance with the applicable procedures.']},
+     after:{title:'Why can’t I see live prices, and how do I fix it?',lead:'Live prices stay off until a market data bundle is switched on in your platform. It takes about two minutes.',steps:['Open Settings and choose Market Data.','Select the data bundle for the market you trade and confirm.','Close the platform fully and open it again.'],result:'You should now see prices moving on your chart.',fallback:'Still blank? Send us your platform name, the market you are trading and a screenshot, and we will fix it in one reply.'},
+     b:[false,false,false,false,false,true], a:[true,true,true,true,true,true]},
+    {tab:'Daily loss limit',
+     before:{title:'Loss limits',body:['The daily loss limit is applied in accordance with the program rules and is calculated using the prevailing balance and equity figures, as further detailed in the rules document.','Accounts that exceed the applicable limit will be closed with immediate effect and shall not be eligible for reinstatement except as expressly provided.']},
+     after:{title:'What is the daily loss limit, and how do I see how close I am?',lead:'The daily loss limit is the most an account can lose in one trading day. If an account reaches it, the account is closed and you can start a new evaluation.',steps:['Open your dashboard and find "Daily loss remaining".','Compare it with the open profit or loss on your trades.','Check the figure again whenever you open or close a trade.'],result:'Example: on a 50K account with a 1,000 daily limit, a trader who is down 800 has 200 left.',fallback:'Questions about a closure? Send us the account ID and the date, and we will show you the exact calculation.'},
+     b:[false,false,false,false,false,true], a:[true,true,true,true,true,true]}
+  ];
+  var faqTabs=$('#faqTabs'), faqView=$('#faqView');
+  function score(a){return a.filter(Boolean).length}
+  function showFaq(i){
+    Array.prototype.forEach.call(faqTabs.children,function(b,k){b.setAttribute('aria-selected',k===i?'true':'false')});
+    var f=FAQ[i];
+    var before='<div class="side before"><span class="chip">Before</span><h4>'+esc(f.before.title)+'</h4>'+f.before.body.map(function(p){return '<p>'+esc(p)+'</p>'}).join('')+'</div>';
+    var after='<div class="side"><span class="chip">After</span><h4>'+esc(f.after.title)+'</h4><p><strong>'+esc(f.after.lead)+'</strong></p><ol>'+f.after.steps.map(function(s){return '<li>'+esc(s)+'</li>'}).join('')+'</ol><p>'+esc(f.after.result)+'</p><p class="small" style="margin:0">'+esc(f.after.fallback)+'</p></div>';
+    var rows=TESTS.map(function(t,k){
+      return '<tr><td style="white-space:normal">'+esc(t)+'</td><td><span class="pill '+(f.b[k]?'good':'bad')+'">'+(f.b[k]?'Pass':'Fail')+'</span></td><td><span class="pill '+(f.a[k]?'good':'bad')+'">'+(f.a[k]?'Pass':'Fail')+'</span></td></tr>';
+    }).join('');
+    faqView.innerHTML='<div class="cmp">'+before+after+'</div>'+
+      '<div class="scroll"><table class="tbl"><thead><tr><th>Six tests</th><th>Before</th><th>After</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
+      '<p class="summary" style="margin:12px 0 0">Before: '+score(f.b)+' of '+TESTS.length+' · After: '+score(f.a)+' of '+TESTS.length+'</p>';
+  }
+  FAQ.forEach(function(f,i){
+    var b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.setAttribute('aria-selected','false');b.textContent=f.tab;
+    b.addEventListener('click',function(){showFaq(i)});faqTabs.appendChild(b);
+  });
+  showFaq(0);
+
+  /* ---------- 3. Trader account attention (fictional) ---------- */
+  var ACCTS=[
+    ['ACC-25K-1182','25K',84,2,1,true],['ACC-100K-3305','100K',35,9,3,false],['ACC-50K-2210','50K',92,0,0,true],
+    ['ACC-150K-8120','150K',52,4,1,false],['ACC-150K-4471','150K',60,3,2,true],['ACC-50K-9340','50K',70,2,0,true],
+    ['ACC-50K-1936','50K',40,12,0,true],['ACC-25K-0874','25K',40,1,0,true],['ACC-50K-6042','50K',30,2,1,true],
+    ['ACC-100K-5120','100K',18,0,0,true],['ACC-25K-7733','25K',12,1,0,true],['ACC-100K-9017','100K',8,0,0,true]
+  ].map(function(a){
+    var dd=a[2], idle=a[3], cases=a[4], feed=a[5];
+    var score=Math.round(0.6*dd+0.15*Math.min(idle,10)*10+0.15*Math.min(cases,4)*25+0.10*(feed?0:100));
+    var flag=dd>=65?'dd':!feed?'feed':cases>=2?'cases':idle>=7?'idle':'none';
+    return {id:a[0],size:a[1],dd:dd,idle:idle,cases:cases,feed:feed,score:score,flag:flag,
+      status:score>=55?'Reach out today':score>=30?'Check in':'On track'};
+  }).sort(function(a,b){return b.score-a.score});
+  var STEP={
+    dd:{label:'Drawdown used',step:'Send a plain reminder of how much drawdown remains and where to see it in the dashboard. Share the rules, never trading advice.',review:'Track reminders sent against limit breaches that followed.'},
+    feed:{label:'Market data not activated',step:'Walk them through activating market data on their platform and confirm live prices before they next trade.',review:'Track how many "no prices" cases are solved in a single conversation.'},
+    cases:{label:'Open cases',step:'Review every open case, send one status message with a clear next date, and close what is finished.',review:'Track cases open longer than the agreed response time.'},
+    idle:{label:'No recent trading',step:'Check in and ask whether something is blocking them, such as login, market data or a rule question.',review:'Track how many inactive accounts return to trading after a check-in.'},
+    none:{label:'No flags',step:'Routine check-in only. Nothing needs action today.',review:'Keep as a baseline to compare against.'}
+  };
+  var STATUSES=['Reach out today','Check in','On track'];
+  var cls={'Reach out today':'bad','Check in':'warn','On track':'good'};
+  var barColor={'Reach out today':'var(--bad)','Check in':'var(--warn)','On track':'var(--good)'};
+  var filterNow='All', selNow=ACCTS[0].id;
+  var filtersEl=$('#filters'), tbody=$('#acctTable tbody'), panel=$('#panel');
+  function renderFilters(){
+    filtersEl.innerHTML='';
+    ['All'].concat(STATUSES).forEach(function(f){
+      var n=f==='All'?ACCTS.length:ACCTS.filter(function(a){return a.status===f}).length;
+      var b=document.createElement('button');b.type='button';b.textContent=f+' ('+n+')';
+      b.setAttribute('aria-pressed',f===filterNow?'true':'false');
+      b.addEventListener('click',function(){filterNow=f;renderFilters();renderRows()});
+      filtersEl.appendChild(b);
+    });
+  }
+  function renderRows(){
+    var rows=ACCTS.filter(function(a){return filterNow==='All'||a.status===filterNow});
+    if(rows.length&&!rows.some(function(a){return a.id===selNow})){selNow=rows[0].id}
+    tbody.innerHTML='';
+    rows.forEach(function(a){
+      var tr=document.createElement('tr');if(a.id===selNow)tr.className='sel';
+      tr.innerHTML='<td><button type="button" class="rowbtn">'+esc(a.id)+'</button></td>'+
+        '<td>'+esc(a.size)+'</td>'+
+        '<td><span class="score"><b>'+a.score+'</b><i><u style="width:'+Math.min(a.score,100)+'%;background:'+barColor[a.status]+'"></u></i></span></td>'+
+        '<td>'+a.dd+'%</td><td>'+a.idle+'</td><td>'+a.cases+'</td><td>'+(a.feed?'Active':'Not activated')+'</td>'+
+        '<td><span class="pill '+cls[a.status]+'">'+a.status+'</span></td>';
+      tr.querySelector('.rowbtn').addEventListener('click',function(){selNow=a.id;renderRows()});
+      tbody.appendChild(tr);
+    });
+    renderPanel();
+  }
+  function renderPanel(){
+    var a=ACCTS.filter(function(x){return x.id===selNow})[0];
+    if(!a){panel.innerHTML='';return}
+    var s=STEP[a.flag];
+    var urgency=a.status==='Reach out today'?'Reach out today. ':a.status==='Check in'?'Reach out this week. ':'';
+    panel.innerHTML=
+      '<div><h3>Signal</h3><p><strong>'+esc(a.id)+'</strong> ('+esc(a.size)+' program) scores '+a.score+'. Main flag: '+esc(s.label.toLowerCase())+'. Drawdown used '+a.dd+'%, '+a.idle+' days since the last trade, '+a.cases+(a.cases===1?' open case':' open cases')+', market data '+(a.feed?'active':'not activated')+'.</p></div>'+
+      '<div><h3>Next step</h3><p>'+urgency+esc(s.step)+'</p></div>'+
+      '<div><h3>For the weekly review</h3><p>'+esc(s.review)+'</p></div>';
+  }
+  renderFilters();renderRows();
+
+  /* ---------- 4. Client communication (fictional) ---------- */
+  var WRITING=[
+    {tab:'Case outcome follow-up',scene:'A trader asks for a closed account to be reinstated. After review, the answer is no.',
+      msg:['Hi Sam,','Thank you for waiting while we reviewed your request. I want to give you the outcome plainly: we are not able to reinstate the account.','The account reached its daily loss limit on the 14th, and under rule 4.2 of the program guidelines an account cannot be reinstated after that. I know this is not the answer you were hoping for.','Here is what you can do next: you can start a new evaluation whenever you are ready, or I can walk you through how the limit is calculated so you can see exactly where the account crossed it.','I will check in with you tomorrow to make sure you have what you need.'],
+      why:['The outcome comes in the first two sentences, so Sam is not left reading around it.','It names the rule and the date, which answers the most common question: "why?"','It offers two next steps and sticks to facts. It does not comment on how the trades were placed.','It sets a follow-up time, which I then keep.']},
+    {tab:'Platform walkthrough',scene:'A trader cannot see live prices on their trading platform.',
+      msg:['Hi Priya, that usually means the data feed is switched off. Here are the steps:','1. Open Settings.','2. Choose Market Data.','3. Select the data bundle for your market and confirm.','4. Close the platform fully and open it again.','After step 4 you should see prices moving on your chart. If you do not, tell me the platform name and what you see on screen, and I will go through it with you.'],
+      why:['One action per step, in the order the trader sees them on screen.','It says what success looks like, so the trader knows when to stop.','It gives a fallback and asks for exactly what I need to help further.']},
+    {tab:'Proactive check-in',scene:'A trader has not placed a trade for eight days.',
+      msg:['Hi Daniel,','I noticed there has been no trading activity on your account for the last eight days, and I wanted to check in.','Is something getting in the way? For example the platform login, market data not showing, or a rule you are not sure about.','If it helps, I can walk you through any of them in a quick chat. What would be most useful for you?'],
+      why:['It starts with what I noticed, not with a sales pitch.','It asks instead of assuming, and lists three likely causes to make replying easy.','It offers one specific, small piece of help and does not comment on trading decisions.']}
+  ];
+  var tabsEl=$('#tabs'), tabPanel=$('#tabPanel');
+  function showTab(i){
+    Array.prototype.forEach.call(tabsEl.children,function(b,k){b.setAttribute('aria-selected',k===i?'true':'false')});
+    var w=WRITING[i];
+    tabPanel.innerHTML='<p class="small"><strong>Situation:</strong> '+esc(w.scene)+'</p>'+
+      '<div class="cols"><div class="msgbox">'+w.msg.map(function(p){return '<p>'+esc(p)+'</p>'}).join('')+'</div>'+
+      '<div><h3 style="margin-bottom:.5rem">Why it is written this way</h3><ul class="why">'+w.why.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul></div></div>';
+  }
+  WRITING.forEach(function(w,i){
+    var b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.setAttribute('aria-selected','false');b.textContent=w.tab;
+    b.addEventListener('click',function(){showTab(i)});tabsEl.appendChild(b);
+  });
+  showTab(0);
+
+  /* ---------- 5. Contact ---------- */
+  $('#copy').addEventListener('click',function(){
+    var msg=$('#copyMsg'), el=$('#addr'), text=el.textContent;
+    function fallback(){
+      try{var r=document.createRange();r.selectNodeContents(el);var s=window.getSelection();s.removeAllRanges();s.addRange(r)}catch(e){}
+      msg.textContent='Press Ctrl+C or long-press to copy.';
+    }
+    try{
+      navigator.clipboard.writeText(text).then(function(){msg.textContent='Copied.'},fallback);
+    }catch(e){fallback()}
+  });
+})();
+</script>
+
+</body>
+</html>
